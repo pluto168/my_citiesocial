@@ -8,3 +8,6 @@ import * as ActiveStorage from "@rails/activestorage"
 
 Rails.start()
 ActiveStorage.start()
+
+import "controllers"
+import "styles/frontend/index.js"
