@@ -1,5 +1,4 @@
 //burger menu
-
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements
@@ -20,4 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+});
+
+//notices x按鈕
+document.addEventListener('DOMContentLoaded', () => {
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
 });
