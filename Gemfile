@@ -26,6 +26,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 #gem
 gem 'devise', '~> 4.8', '>= 4.8.1'
+gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
+gem 'figaro', '~> 1.2'
 
 
 group :development, :test do
