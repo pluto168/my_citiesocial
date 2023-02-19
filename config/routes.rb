@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show] #products在前端不需要全部路徑
 
+  #後台
   namespace :astroser do
     root 'products#index'    #/astroser
     resources :products
