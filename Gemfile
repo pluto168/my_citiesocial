@@ -27,8 +27,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 #gem
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
+gem "omniauth-rails_csrf_protection"
 gem 'figaro', '~> 1.2'
 
+#不會出現already initialized constant errors" with net/protocol 錯誤
+gem 'net-http', '~> 0.3.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,8 +48,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  #不會出現already initialized constant errors" with net/protocol 錯誤
-  gem 'net-http', '~> 0.3.2'
 end
 
 group :test do
