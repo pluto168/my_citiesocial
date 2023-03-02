@@ -29,6 +29,7 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
 gem "omniauth-rails_csrf_protection"
 gem 'figaro', '~> 1.2'
+gem 'paranoia', '~> 2.6', '>= 2.6.1'
 
 #不會出現already initialized constant errors" with net/protocol 錯誤
 gem 'net-http', '~> 0.3.2'

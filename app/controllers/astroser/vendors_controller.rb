@@ -24,6 +24,9 @@ class Astroser::VendorsController < Astroser::BaseController
 
   def destroy
     #@vendor = Vendor.find(params[:id])
+    @vendor.destroy     #在gem中已加入paranoia軟刪除
+    # @vendor.update(deleted: true)
+    redirect_to astroser_vendors_path, notice: '廠商已刪除'
   end
 
   def create
