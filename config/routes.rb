@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   namespace :astroser do
     root 'products#index'    #/astroser
     resources :products
+    resources :vendors, expect: [:show]   #後台不需show,有新增,修改,刪除,列表
   end
 end
