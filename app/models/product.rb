@@ -18,4 +18,7 @@ class Product < ApplicationRecord
   #   SecureRandom.hex(10)    #產生10碼16進位的亂碼
   # end
 
+  #paranoia軟刪除
+  acts_as_paranoid
+
 end
