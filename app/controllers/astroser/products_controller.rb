@@ -2,7 +2,7 @@ class Astroser::ProductsController < Astroser::BaseController
   before_action :find_product, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all.includes(:vendor)
+    @products = Product.all.includes(:vendor).page params[:page]
   end
 
   def new

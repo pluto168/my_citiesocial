@@ -2,7 +2,7 @@ class Astroser::VendorsController < Astroser::BaseController
   before_action :find_vendor, only: [:edit, :update, :destroy]
 
   def index
-    @vendors = Vendor.all
+    @vendors = Vendor.all.page params[:page]
   end
 
   def new

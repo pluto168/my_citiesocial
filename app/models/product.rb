@@ -21,4 +21,6 @@ class Product < ApplicationRecord
   #paranoia軟刪除
   acts_as_paranoid
 
+  #分頁
+  paginates_per 10
 end

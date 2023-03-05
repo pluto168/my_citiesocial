@@ -1,6 +1,6 @@
 <h1 class="title">商品列表</h1>
 
-<%= link_to "新增商品",new_astroser_product_path,class: 'button' %>
+<%= link_to "新增商品",new_astroser_product_path,class: 'button is-info' %>
 
 <table class="table is-fullwidth">
   <thead>
@@ -27,3 +27,11 @@
     <% end %>
   </tbody>
 </table>
+  <div class="columns" >
+    <div class="column is-2">
+      <%= paginate @products %>
+    </div>
+  </div>
+
+
+
