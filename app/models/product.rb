@@ -23,4 +23,8 @@ class Product < ApplicationRecord
 
   #分頁
   paginates_per 10
+
+  #文字編輯器
+  has_rich_text :description     #有一個虛擬欄位:description 
+  
 end

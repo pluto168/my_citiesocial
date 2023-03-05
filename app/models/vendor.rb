@@ -4,7 +4,7 @@ class Vendor < ApplicationRecord
   #paranoia軟刪除
   acts_as_paranoid
   
-  #available,_form裏面的Vendor.available
+  #available,prodicts裏面_form裏面的Vendor.available
   scope :available, -> { where(online: true)}
 
   # def self.available

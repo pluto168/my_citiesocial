@@ -6,6 +6,10 @@
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 
+//enable action text
+require("trix")
+require("@rails/actiontext")
+
 Rails.start()
 ActiveStorage.start()
 
