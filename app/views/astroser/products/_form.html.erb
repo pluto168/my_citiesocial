@@ -41,6 +41,14 @@
     <%= form.label :description, '商品描述', class: 'label' %>
     <%= form.rich_text_area :description %>
   </div>
+  
+  <hr>
+  <h3>庫存項目</h3>
+    <%# fields_for就是products的modle裡面 accepts_nested_attributes_for %>  
+    <%= form.fields_for :skus do |sku_form| %>       
+      <%= render 'sku_fields', form: sku_form %>
+    <% end %>
 
   <%= form.submit class: 'button is-primary is-medium' %>
 <% end %>
+

@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  
+  #廠商
   belongs_to :vendor
 
   #驗證
@@ -26,5 +28,11 @@ class Product < ApplicationRecord
 
   #文字編輯器
   has_rich_text :description     #有一個虛擬欄位:description 
+
+  #Sku
+  has_many :skus
+  accepts_nested_attributes_for :skus, reject_if: :all_blank, allow_destroy: true   
+      #reject_if空白就不能寫入,allow_destroy品項打錯或售完可以刪除
+  
   
 end
