@@ -16,7 +16,7 @@ export default class extends Controller {
       data: data,
       type: 'POST',
       dataType: 'json',
-      success: (response) =>{           //arrow function
+      success: (response) =>{           //arrow function ,才能接到外部的this
         switch(response.status){
           case 'ok':
             alert('完成訂閱');
