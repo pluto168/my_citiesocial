@@ -7,6 +7,7 @@ class Category < ApplicationRecord
   #驗證
   validates :name, presence: true
 
+  #商品分類
+  acts_as_list
   
-
 end
