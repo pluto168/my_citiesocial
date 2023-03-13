@@ -2,6 +2,8 @@ class Product < ApplicationRecord
   
   #廠商
   belongs_to :vendor
+  #分類,optional是可以不填,rails5以後是規定一定要填
+  belongs_to :category, optional: true
 
   #驗證
   validates :code, uniqueness: true
@@ -33,5 +35,8 @@ class Product < ApplicationRecord
   has_many :skus
   accepts_nested_attributes_for :skus, reject_if: :all_blank, allow_destroy: true   
       #reject_if空白就不能寫入,allow_destroy品項打錯或售完可以刪除
+
+  #檔案上傳,不須另外開欄位,為虛擬欄位
+  has_one_attached :cover_image
   
 end
