@@ -1,5 +1,5 @@
 class Astroser::CategoriesController < Astroser::BaseController
-  before_action :find_category, only: [:edit, :update, :destroy]
+  before_action :find_category, only: [:edit, :update, :destroy, :sort]
   
   def index
     @category = Category.all.order(position: :asc)       #all可以省略
@@ -34,6 +34,11 @@ class Astroser::CategoriesController < Astroser::BaseController
     #@category=Product.find(params[:id])
     @category.destroy
     redirect_to astroser_categories_path, notice: '分類已刪除'
+  end
+
+  def sort
+    @category.insert_at(params[:to].to_i + 1)
+    render json: {status: 'ok'}
   end
 
   private
