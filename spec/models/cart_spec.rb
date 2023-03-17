@@ -20,6 +20,21 @@ RSpec.describe Cart, type: :model do
       expect(cart.items.first.quantity).to be 3     #測試數量是不是3
       # expect(cart.items.last.quantity).to be 2
     end
+
+    it "商品可以放到購物車裡，也可以再拿出來。" do
+      #1A,購物車想new出來
+      cart = Cart.new
+
+      
+      v1 =  Vendor.create(title: 'v1')
+      p1 =  Product.create(name: 'kk', list_price: '10', sell_price: '5', vendor: v1)
+
+      #2A,把操作,把東西丟到購物車
+      cart.add_item(p1.id)
+
+      #3A,評估,東西放進去再拿出來後,是不是原物
+      expect(cart.items.first.product).to be_a Product
+    end
   end 
 
   context "進階功能" do
