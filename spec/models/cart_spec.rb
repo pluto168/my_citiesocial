@@ -25,9 +25,9 @@ RSpec.describe Cart, type: :model do
       #1A,購物車想new出來
       cart = Cart.new
 
-      
-      v1 =  Vendor.create(title: 'v1')
-      p1 =  Product.create(name: 'kk', list_price: '10', sell_price: '5', vendor: v1)
+      # v1 =  Vendor.create(title: 'v1')
+      # p1 =  Product.create(name: 'kk', list_price: '10', sell_price: '5', vendor: v1)
+      p1 = FactoryBot.create(:product)
 
       #2A,把操作,把東西丟到購物車
       cart.add_item(p1.id)
