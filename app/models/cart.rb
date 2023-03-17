@@ -8,7 +8,15 @@ class Cart
     end
 
     def add_item(product_id)
-        @items << product_id    # <<是把product_id丟到陣列@items
+        #查詢是否存在,沒找到才增新
+        found = @items.find { |item| item.product_id == product_id }
+
+        if found
+            found.increment!
+        else
+            # @items << product_id    # <<是把product_id丟到陣列@items
+            @items << CartItem.new(product_id)
+        end
     end
 
     def empty?
