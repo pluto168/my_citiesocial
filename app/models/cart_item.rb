@@ -16,6 +16,10 @@ class CartItem
     def product
         Product.find_by(id: product_id)
     end
+
+    def total_price
+        product.sell_price * @quantity     #s商品 * 數量
+    end
 end
 
 # CartItem.new(2,3)  #商品2號,數量3
