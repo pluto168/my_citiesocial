@@ -38,4 +38,23 @@ class Cart
 
         @items.reduce(0) { |sum, item| sum + item.total_price }
     end
+
+    #進階功能
+    def serialize
+
+        #寫死code
+        # items = [
+        #     {"product_id" => 1, "quantity" => 3},
+        #     {"product_id" => 2, "quantity" => 2},
+        # ]
+
+        #可輸入code
+        items = @items.map { |item| {   "product_id" => item.product_id, 
+                                        "quantity" => item.quantity     }
+
+        }
+
+        { "items" => items}
+        
+    end
 end
