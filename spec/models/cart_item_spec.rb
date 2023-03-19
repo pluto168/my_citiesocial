@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe CartItem, type: :model do
+  #不用寫@cart.new
+  let(:cart) { Cart.new  } 
+
   # pending "add some examples to (or delete) #{__FILE__}"
   it "每個 Cart Item 都可以計算它自己的金額（小計）" do
       #1A
-      cart = Cart.new
+      # cart = Cart.new
 
       #2A spec/rails_helper.rb有config.include FactoryBot::Syntax::Methods,所以不用寫FactoryBot.create
       p1 = create(:product, sell_price: 5)
