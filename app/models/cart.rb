@@ -26,4 +26,16 @@ class Cart
     # def items               #attr_reader :items就可以寫出這3行   
     #     return @items 
     # end
+
+    def total_price
+        # total = 0
+        
+        # @items.each do |item|
+        #     total += item.total_price
+        # end
+
+        # total
+
+        @items.reduce(0) { |sum, item| sum + item.total_price }
+    end
 end
