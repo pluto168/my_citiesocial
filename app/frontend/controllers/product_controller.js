@@ -10,7 +10,7 @@ export default class extends Controller {
         let product_id = this.data.get("id");
         let quantity = this.quantityTarget.value; 
         let sku = this.skuTarget.value;
-
+                                
         if(quantity > 0 ){
             this.addToCartButtonTarget.classList.add('is-loading');     //數量大於0,就會開始loading
             
@@ -24,11 +24,21 @@ export default class extends Controller {
                 data: data,
                 type: "POST",
                 success: resp => {
-                    console.log(resp);
+                    if (resp.status === 'ok'){
+                        let item_count = resp.items || 0 ;      //如果沒抓到就預設給0
+                    
+                        // console.log(resp);
+                        //發一個全域event事件,
+                        let evt = new CustomEvent('addToCart',{'detail': {item_count}});    //es5 {item_count:item_count}
+                        document.dispatchEvent(evt);
+                    }
                 },
                 error: err => {
                     console.log(err);
                 },
+                complete: () => {
+                    this.addToCartButtonTarget.classList.remove('is-loading');     //移除loading button,不管成功or失敗
+                }
             });
         }
     }
