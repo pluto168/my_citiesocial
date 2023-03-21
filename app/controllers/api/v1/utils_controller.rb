@@ -19,11 +19,13 @@ class Api::V1::UtilsController < ApplicationController
 
     if product 
       # cart = Cart.new 這邊這樣不是正確
-      cart = Cart.from_hash(session[:cart_9527])
-      cart.add_item(product.code)
-      session[:cart_9527] = cart.serialize       #serialize可以把購物車物件序列化成一個hash,再存到session裡面
+      #cart = Cart.from_hash(session[:cart_9527])
+      #上面用application裡的current_cart取代
 
-      render json: {status: 'ok', items:cart.items.count }
+      current_cart.add_item(product.code)
+      session[:cart_9527] = current_cart.serialize       #serialize可以把購物車物件序列化成一個hash,再存到session裡面
+
+      render json: {status: 'ok', items:current_cart.items.count }
     end
   end
 end
