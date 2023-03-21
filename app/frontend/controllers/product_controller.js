@@ -1,11 +1,38 @@
 import { Controller } from "stimulus"
+import Rails from "@rails/ujs"
 
 export default class extends Controller {
-    static targets = [ "quantity" ]
+    static targets = [ "quantity","sku","addToCartButton" ]
 
-    connect(){
-        
+    add_to_cart(evt) {
+        evt.preventDefault();
+
+        let product_id = this.data.get("id");
+        let quantity = this.quantityTarget.value; 
+        let sku = this.skuTarget.value;
+
+        if(quantity > 0 ){
+            this.addToCartButtonTarget.classList.add('is-loading');     //數量大於0,就會開始loading
+            
+            let data = new FormData();
+            data.append("id",product_id);
+            data.append("quantity",quantity);
+            data.append("sku",sku);
+            //打api
+            Rails.ajax({
+                url: "/api/helo",
+                data: data,
+                type: "POST",
+                success: respo => {
+
+                },
+                error: err => {
+
+                },
+            })
+        }
     }
+    
 
     quantity_minus(evt){
         evt.preventDefault();
