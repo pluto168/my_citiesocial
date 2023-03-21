@@ -20,16 +20,16 @@ export default class extends Controller {
             data.append("sku",sku);
             //打api
             Rails.ajax({
-                url: "/api/helo",
+                url: "/api/v1/cart",
                 data: data,
                 type: "POST",
-                success: respo => {
-
+                success: resp => {
+                    console.log(resp);
                 },
                 error: err => {
-
+                    console.log(err);
                 },
-            })
+            });
         }
     }
     
