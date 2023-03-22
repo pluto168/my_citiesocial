@@ -22,7 +22,7 @@ RSpec.describe Cart, type: :model do
       # cart = Cart.new
       cart.add_item(2)   #2代表商品編號
       # expect(cart.empty?).to be false  #expect,購物車的empty是不是false
-      expect(cart).no_to be_empty   #expect預期不是空的
+      expect(cart).not_to be_empty   #expect預期不是空的
     end
 
     it "如果加了相同種類的商品到購物車裡，購買項目（CartItem）並不會增加，但商品的數量會改變。" do

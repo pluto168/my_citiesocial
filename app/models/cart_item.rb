@@ -14,7 +14,9 @@ class CartItem
     end
 
     def product
-        Product.find_by(id: product_id)
+        # Product.find_by(id: product_id)     這樣app/views/carts/show.html.erb的product會抓不到
+        Product.friendly.find(product_id)
+
     end
 
     def total_price

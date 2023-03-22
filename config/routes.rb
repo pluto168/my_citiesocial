@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   #前台
   resources :products, only: [:index, :show] #products在前端不需要全部路徑
   resources :categories, only: [:show]       #/category/2
+  resource :cart, only: [:show, :destroy]    #resources複數有帶id,resource單數沒有id
+
 
   #後台
   namespace :astroser do
