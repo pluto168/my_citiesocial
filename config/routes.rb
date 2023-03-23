@@ -6,7 +6,14 @@ Rails.application.routes.draw do
   #前台
   resources :products, only: [:index, :show] #products在前端不需要全部路徑
   resources :categories, only: [:show]       #/category/2
-  resource :cart, only: [:show, :destroy]    #resources複數有帶id,resource單數沒有id
+  
+  #resources複數有帶id,resource單數沒有id
+  resource :cart, only: [:show, :destroy]  do
+    #cart/checkout
+    collection do
+      get :checkout      #checkout_cart_path
+    end
+  end
 
 
   #後台
