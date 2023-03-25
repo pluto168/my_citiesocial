@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
+  #order路徑
+  resource :orders, except: [:new, :edit, :update, :destroy] do
+    
+  end
 
   #後台
   namespace :astroser do

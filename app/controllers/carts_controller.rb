@@ -11,6 +11,6 @@ class CartsController < ApplicationController
     end
 
     def checkout
-    
+        @order = current_user.orders.build                          #app/views/carts/checkout.html.erb, 從user角度建立訂單
     end
 end
