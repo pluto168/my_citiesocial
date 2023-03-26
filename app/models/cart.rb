@@ -8,15 +8,15 @@ class Cart
         @items = items
     end
 
-    def add_item(product_id)
+    def add_sku(sku_id)             #add_item換成add_sku,rpoduct_id換成sku_id
         #查詢是否存在,沒找到才增新
-        found = @items.find { |item| item.product_id == product_id }
+        found = @items.find { |item| item.sku_id == sku_id }
 
         if found
             found.increment!
         else
-            # @items << product_id    # <<是把product_id丟到陣列@items
-            @items << CartItem.new(product_id)
+            # @items << sku_id    # <<是把sku_id丟到陣列@items
+            @items << CartItem.new(sku_id)
         end
     end
 
@@ -45,15 +45,13 @@ class Cart
 
         #寫死code
         # items = [
-        #     {"product_id" => 1, "quantity" => 3},
-        #     {"product_id" => 2, "quantity" => 2},
+        #     {"sku_id" => 1, "quantity" => 3},
+        #     {"sku_id" => 2, "quantity" => 2},
         # ]
 
         #可輸入code
-        items = @items.map { |item| {   "product_id" => item.product_id, 
-                                        "quantity" => item.quantity     }
-
-        }
+        items = @items.map { |item| {   "sku_id" => item.sku_id, 
+                                        "quantity" => item.quantity     }}
 
         { "items" => items}
         
@@ -62,14 +60,14 @@ class Cart
     def self.from_hash(hash = nil)
         # {
         #     "items" => [
-        #       {"product_id" => 1, "quantity" => 3},
-        #       {"product_id" => 2, "quantity" => 2},
+        #       {"sku_id" => 1, "quantity" => 3},
+        #       {"sku_id" => 2, "quantity" => 2},
         #     ]
         #   }
         if hash && hash["items"]
             #map蒐集成一個新的陣列
             items = hash["items"].map { |item|
-                CartItem.new(item["product_id"], item["quantity"])
+                CartItem.new(item["sku_id"], item["quantity"])
             }
             # p items
 

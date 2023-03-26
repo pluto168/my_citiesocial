@@ -9,3 +9,4 @@ end
 # FactoryBot.create(:vendor)     #在資料庫裡面建立一筆資料,會直接存進資料庫
 # FactoryBot.build(:vendor)      
 
+

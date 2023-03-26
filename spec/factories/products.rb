@@ -9,5 +9,17 @@ FactoryBot.define do
     
     vendor     #會自己找到對應的vendor
     category
+
+    trait :with_skus do 
+      transient do
+        amount {2}
+      end
+      
+      skus { build_list :sku, amount}
+
+    end
   end
 end
+
+# FactoryBot.create(:product)
+# FactoryBot.create(:product, :with_skus, amount: 5)

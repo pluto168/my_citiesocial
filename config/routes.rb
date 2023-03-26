@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   #order路徑
-  resource :orders, except: [:new, :edit, :update, :destroy] do
+  resources :orders, except: [:new, :edit, :update, :destroy] do
     
   end
 

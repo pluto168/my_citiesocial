@@ -5,4 +5,5 @@ class Order < ApplicationRecord
 
   #驗證欄位
   validates :recipient, :tel, :address, presence: true
+  
 end
