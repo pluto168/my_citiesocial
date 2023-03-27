@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
                         "productName": "3C購物中心",
                         "amount": current_cart.total_price.to_i,
                         "currency": "TWD",
-                        "confirmUrl": "http://localhost:3000/orders/confirmed",
+                        "confirmUrl": "http://localhost:3000/orders/confirm",
                         "orderId": @order.num
                 }.to_json
             end
@@ -33,6 +33,30 @@ class OrdersController < ApplicationController
                 flash[:notice] = "付款發生錯誤"
                 render 'carts/checkout'
             end
+        end
+    end
+
+    def confirm
+        # id = params[:transactionId]
+        # render html: id
+        resp = Faraday.post("#{ENV['line_pay_endpoint']}/v2/payments/#{params[:transactionId]}/confirm") do |req|
+            req.headers['Content-Type'] = 'application/json'
+            req.headers['X-LINE-ChannelId'] = ENV['line_pay_channel_id']
+            req.headers['X-LINE-ChannelSecret'] = ENV['line_pay_channel_secret_key']
+            req.body = {
+                    "amount": current_cart.total_price.to_i,
+                    "currency": "TWD"
+            }.to_json
+        end
+
+        result = JSON.parse(resp.body)
+
+        if result["returnCode"] == "0000"
+            # 1. 變更 order 狀態
+            # 2. 清空購物車
+            # redirect_to root_path, notice: '付款已完成'
+        else
+            redirect_to root_path, notice: '付款發生錯誤'
         end
     end
 

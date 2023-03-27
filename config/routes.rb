@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   #order路徑
   resources :orders, except: [:new, :edit, :update, :destroy] do
-    
+    collection do 
+      #/orders/confirm
+      get :confirm
+    end
   end
 
   #後台
