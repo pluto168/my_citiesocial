@@ -11,7 +11,7 @@ class Order < ApplicationRecord
 
   private
   def generate_order_num
-    self.order = SecureRandom.hex(5) unless num    #10個16進位
+    self.num = SecureRandom.hex(5) unless num #10個16進位
   end
   
 end
