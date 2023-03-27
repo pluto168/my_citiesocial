@@ -33,6 +33,7 @@ gem 'paranoia', '~> 2.6', '>= 2.6.1'
 gem 'friendly_id', '~> 5.5'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'acts_as_list', '~> 1.1'
+gem 'faraday', '~> 2.7', '>= 2.7.4'
 
 #不會出現already initialized constant errors" with net/protocol 錯誤
 gem 'net-http', '~> 0.3.2'
