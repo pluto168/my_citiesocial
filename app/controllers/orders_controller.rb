@@ -78,9 +78,9 @@ class OrdersController < ApplicationController
 
         if @order.paid?
             resp = Faraday.post("#{ENV['line_pay_endpoint']}/v2/payments/#{@order.transation_id}/refund") do |req|
-            req.headers['Content-Type'] = 'application/json'
-            req.headers['X-LINE-ChannelId'] = ENV['line_pay_channel_id']
-            req.headers['X-LINE-ChannelSecret'] = ENV['line_pay_channel_secret_key']
+                req.headers['Content-Type'] = 'application/json'
+                req.headers['X-LINE-ChannelId'] = ENV['line_pay_channel_id']
+                req.headers['X-LINE-ChannelSecret'] = ENV['line_pay_channel_secret_key']
             end
 
             result = JSON.parse(resp.body)
@@ -94,6 +94,56 @@ class OrdersController < ApplicationController
         else
             @order.cancel! 
             redirect_to orders_path, notice: "訂單 #{@order.num} 已取消！"
+        end
+    end
+
+    def pay
+        @order = current_user.orders.find(params[:id])
+    
+        resp = Faraday.post("#{ENV['line_pay_endpoint']}/v2/payments/request") do |req|
+            req.headers['Content-Type'] = 'application/json'
+            req.headers['X-LINE-ChannelId'] = ENV['line_pay_channel_id']
+            req.headers['X-LINE-ChannelSecret'] = ENV['line_pay_channel_secret_key']
+            req.body = {
+                productName: "3C購物中心", 
+                amount: @order.total_price.to_i, 
+                currency: "TWD", 
+                confirmUrl: "http://localhost:3000/orders/#{@order.id}/pay_confirm", 
+                orderId: @order.num
+            }.to_json
+        end
+    
+        result = JSON.parse(resp.body)
+    
+        if result["returnCode"] == "0000" 
+            payment_url = result["info"]["paymentUrl"]["web"]
+            redirect_to payment_url
+        else
+            redirect_to orders_path, notice: '付款發生錯誤'
+        end
+    end
+
+    def pay_confirm
+        @order = current_user.orders.find(params[:id])
+    
+        resp = Faraday.post("#{ENV['line_pay_endpoint']}/v2/payments/#{params[:transactionId]}/confirm") do |req|
+            req.headers['Content-Type'] = 'application/json'
+            req.headers['X-LINE-ChannelId'] = ENV['line_pay_channel_id']
+            req.headers['X-LINE-ChannelSecret'] = ENV['line_pay_channel_secret_key']
+            req.body = {
+                amount: @order.total_price.to_i, 
+                currency: "TWD"
+            }.to_json
+        end
+    
+        result = JSON.parse(resp.body)
+    
+        if result["returnCode"] == "0000"
+            transation_id = result["info"]["transactionId"]
+            @order.pay!(transation_id: transation_id)
+            redirect_to orders_path, notice: '付款已完成'
+        else
+            redirect_to orders_path, notice: '付款發生錯誤'
         end
     end
 
