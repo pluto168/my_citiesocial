@@ -34,6 +34,9 @@ class Order < ApplicationRecord
     end
   end
 
+  def total_price
+    order_items.reduce(0) { |sum, item| sum + item.total_price }
+  end
 
   private
   def generate_order_num

@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
     before_action :authenticate_user!           #要登入才能用,devise附加的功能
 
+    def index
+        @orders = current_user.orders.order(id: :desc)
+    end
+
     def create
         @order = current_user.orders.build(order_params)
 
@@ -68,6 +72,7 @@ class OrdersController < ApplicationController
             redirect_to root_path, notice: '付款發生錯誤'
         end
     end
+
 
     private
     def order_params
