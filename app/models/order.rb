@@ -18,13 +18,12 @@ class Order < ApplicationRecord
     
     event :pay do
       transitions from: :pending, to: :paid           #從閒置中到已付款
-    end
 
-  #     before do |args|
-  #       self.transaction_id = args[:transaction_id]      
-  #       self.paid_at = Time.now
-  #     end
-  #   end
+      before do |args|                                   # 在pay之前動作,呼應1. 變更 order 狀態的order.pay!
+        self.transation_id = args[:transation_id]      #transaction_id,paid_at都是schema裏order欄位
+        self.paid_at = Time.now
+      end
+    end
 
     event :deliver do
       transitions from: :paid, to: :delivered           #已付款到已出貨
