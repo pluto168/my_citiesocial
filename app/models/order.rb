@@ -20,7 +20,7 @@ class Order < ApplicationRecord
       transitions from: :pending, to: :paid           #從閒置中到已付款
 
       before do |args|                                   # 在pay之前動作,呼應1. 變更 order 狀態的order.pay!
-        self.transation_id = args[:transation_id]      #transaction_id,paid_at都是schema裏order欄位
+        self.transation_id = args[:transation_id]      #transation_id,paid_at都是schema裏order欄位
         self.paid_at = Time.now
       end
     end
