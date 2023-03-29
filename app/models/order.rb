@@ -14,19 +14,20 @@ class Order < ApplicationRecord
 
   aasm column: 'state' do                             #aasm要更改成schem裡orders的欄位state,要加column
     state :pending, initial: true
-    state :paid, :delivered, :cancelled
+    state :paid, :delivered, :cancelled               #已付款,已出貨,已取消訂單
     
     event :pay do
-      transitions from: :pending, to: :paid
-
-      before do |args|
-        self.transaction_id = args[:transaction_id]
-        self.paid_at = Time.now
-      end
+      transitions from: :pending, to: :paid           #從閒置中到已付款
     end
 
+  #     before do |args|
+  #       self.transaction_id = args[:transaction_id]      
+  #       self.paid_at = Time.now
+  #     end
+  #   end
+
     event :deliver do
-      transitions from: :paid, to: :delivered
+      transitions from: :paid, to: :delivered           #已付款到已出貨
     end
 
     event :cancel do
